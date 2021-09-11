@@ -39,7 +39,7 @@ public class AlertRabbit {
 
     public static int getInterval() {
         int result = 0;
-        try(BufferedReader reader = new BufferedReader(
+        try (BufferedReader reader = new BufferedReader(
                 new FileReader(
                         "C:\\projects\\job4j_grabber\\src\\main\\resources\\rabbit.properties"
                 )
