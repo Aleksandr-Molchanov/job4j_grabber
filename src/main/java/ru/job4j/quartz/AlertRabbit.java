@@ -64,7 +64,7 @@ public class AlertRabbit {
     public static Properties getProperties() {
         Properties properties = new Properties();
         try (BufferedReader in = new BufferedReader(
-                new FileReader(".\\src\\main\\resources\\rabbit.properties")
+                new FileReader("./src/main/resources/rabbit.properties")
         )) {
             properties.load(in);
         } catch (IOException e) {
