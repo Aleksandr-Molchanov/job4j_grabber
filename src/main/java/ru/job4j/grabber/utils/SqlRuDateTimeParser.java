@@ -22,9 +22,7 @@ public class SqlRuDateTimeParser implements DateTimeParser {
                     Map.entry("сен", "09"),
                     Map.entry("окт", "10"),
                     Map.entry("ноя", "11"),
-                    Map.entry("дек", "12"),
-                    Map.entry("сегодня", LocalDateTime.now().format(FORMATTER)),
-                    Map.entry("вчера", LocalDateTime.now().minusDays(1).format(FORMATTER))
+                    Map.entry("дек", "12")
             );
 
     @Override
@@ -32,8 +30,11 @@ public class SqlRuDateTimeParser implements DateTimeParser {
         String rsl = "";
         String[] dataTime = parse.split(",");
         String key = dataTime[0];
-        if (key.equals("сегодня") || key.equals("вчера")) {
-            rsl = MONTHS.get(key) + dataTime[1];
+        if (key.equals("сегодня")) {
+            rsl = LocalDateTime.now().format(FORMATTER) + " " + dataTime[1];
+        }
+        else if (key.equals("вчера")) {
+            rsl = LocalDateTime.now().minusDays(1).format(FORMATTER) + " " + dataTime[1];
         }
         for (String k : MONTHS.keySet()) {
             if (key.contains(k)) {
@@ -42,8 +43,8 @@ public class SqlRuDateTimeParser implements DateTimeParser {
                         + " " + MONTHS.get(k)
                         + " " + data[2]
                         + dataTime[1];
+                break;
             }
-            break;
         }
         return LocalDateTime.parse(rsl);
     }
