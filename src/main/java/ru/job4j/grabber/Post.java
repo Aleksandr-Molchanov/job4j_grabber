@@ -15,6 +15,9 @@ public class Post {
 
     private LocalDateTime created;
 
+    public Post() {
+    }
+
     public Post(String title, String link, String description, LocalDateTime created) {
         this.title = title;
         this.link = link;
@@ -85,11 +88,17 @@ public class Post {
     @Override
     public String toString() {
         return "Post{"
+                + System.lineSeparator()
                 + "id=" + id
+                + System.lineSeparator()
                 + ", title='" + title + '\''
+                + System.lineSeparator()
                 + ", link='" + link + '\''
+                + System.lineSeparator()
                 + ", description='" + description + '\''
+                + System.lineSeparator()
                 + ", created=" + created
+                + System.lineSeparator()
                 + '}';
     }
 }
