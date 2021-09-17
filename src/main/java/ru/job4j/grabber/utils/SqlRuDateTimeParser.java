@@ -7,7 +7,7 @@ import java.util.Map;
 public class SqlRuDateTimeParser implements DateTimeParser {
 
     private static final DateTimeFormatter FORMATTER =
-            DateTimeFormatter.ofPattern("d MM yy");
+            DateTimeFormatter.ofPattern("d-MM-yy");
 
     private static final Map<String, String> MONTHS =
             Map.ofEntries(
@@ -31,21 +31,22 @@ public class SqlRuDateTimeParser implements DateTimeParser {
         String[] dataTime = parse.split(",");
         String key = dataTime[0];
         if (key.equals("сегодня")) {
-            rsl = LocalDateTime.now().format(FORMATTER) + " " + dataTime[1];
-        }
-        else if (key.equals("вчера")) {
-            rsl = LocalDateTime.now().minusDays(1).format(FORMATTER) + " " + dataTime[1];
+            rsl = LocalDateTime.now().format(FORMATTER) + dataTime[1];
+        } else if (key.equals("вчера")) {
+            rsl = LocalDateTime.now().minusDays(1).format(FORMATTER) + dataTime[1];
         }
         for (String k : MONTHS.keySet()) {
             if (key.contains(k)) {
                 String[] data = key.split(" ");
                 rsl = data[0]
-                        + " " + MONTHS.get(k)
-                        + " " + data[2]
+                        + "-" + MONTHS.get(k)
+                        + "-" + data[2]
                         + dataTime[1];
                 break;
             }
         }
-        return LocalDateTime.parse(rsl);
+        DateTimeFormatter dtf =
+                DateTimeFormatter.ofPattern("d-MM-yy HH:mm");
+        return LocalDateTime.parse(rsl, dtf);
     }
 }
