@@ -116,7 +116,7 @@ public class PsqlStore implements Store, AutoCloseable {
                 System.out.println(post);
             }
             System.out.println("----------------------------------------------");
-            store.findById(1);
+            System.out.println(store.findById(1));
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
