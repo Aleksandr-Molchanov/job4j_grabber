@@ -101,7 +101,7 @@ public class PsqlStore implements Store, AutoCloseable {
 
     public static void main(String[] args) {
         try (BufferedReader in = new BufferedReader(
-                new FileReader("./src/main/resources/rabbit.properties")
+                new FileReader("./src/main/resources/app.properties")
         )) {
             Properties config = new Properties();
             config.load(in);
