@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import ru.job4j.grabber.Parse;
 import ru.job4j.grabber.Post;
+import ru.job4j.grabber.utils.DateTimeParser;
 import ru.job4j.grabber.utils.SqlRuDateTimeParser;
 
 import java.io.IOException;
@@ -15,10 +16,10 @@ import java.util.List;
 
 public class SqlRuParse implements Parse {
 
-    private final SqlRuDateTimeParser sqlRuDateTimeParser;
+    private final DateTimeParser dateTimeParser;
 
-    public SqlRuParse(SqlRuDateTimeParser sqlRuDateTimeParser) {
-        this.sqlRuDateTimeParser = sqlRuDateTimeParser;
+    public SqlRuParse(DateTimeParser dateTimeParser) {
+        this.dateTimeParser = dateTimeParser;
     }
 
     public static void main(String[] args) {
@@ -55,7 +56,7 @@ public class SqlRuParse implements Parse {
             rsl.setDescription(doc.select(".msgBody").get(1).text());
             String cr = doc.select(".msgFooter").first().text().split(" \\[")[0];
             LocalDateTime created =
-                    sqlRuDateTimeParser.parse(cr);
+                    dateTimeParser.parse(cr);
             rsl.setCreated(created);
         } catch (IOException e) {
             e.printStackTrace();
